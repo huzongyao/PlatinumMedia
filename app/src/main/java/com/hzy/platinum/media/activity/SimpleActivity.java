@@ -1,11 +1,13 @@
-package com.hzy.platinum.media;
+package com.hzy.platinum.media.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
-import com.plutinosoft.platinum.UPnP;
+import com.hzy.platinum.media.R;
+import com.hzy.platinum.media.service.MediaRendererService;
 
 /**
  * Created by huzongyao on 2018/6/6.
@@ -14,7 +16,6 @@ import com.plutinosoft.platinum.UPnP;
 public class SimpleActivity extends AppCompatActivity {
 
     private Button mButtonStart;
-    private UPnP mUpnP;
     private boolean mIsRunning = false;
 
     @Override
@@ -22,18 +23,17 @@ public class SimpleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple);
         mButtonStart = findViewById(R.id.button_start);
-        mUpnP = new UPnP();
         mButtonStart.setOnClickListener(v -> {
             if (mIsRunning) {
-                mUpnP.stop();
+                Intent intent = new Intent(this, MediaRendererService.class);
+                stopService(intent);
                 mButtonStart.setText("Start");
                 mIsRunning = false;
             } else {
-                int result = mUpnP.start();
-                if (result == 0) {
-                    mButtonStart.setText("Stop");
-                    mIsRunning = true;
-                }
+                Intent intent = new Intent(this, MediaRendererService.class);
+                startService(intent);
+                mButtonStart.setText("Stop");
+                mIsRunning = true;
             }
         });
     }

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PlatinumMedia</string>
+    <string name="app_name">Platinum</string>
+    <string name="notification_channel_default">Platinum</string>
 </resources>

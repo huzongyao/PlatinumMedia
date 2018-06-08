@@ -1,8 +1,10 @@
-package com.hzy.platinum.media;
+package com.hzy.platinum.media.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.hzy.platinum.media.R;
 
 public class MainActivity extends AppCompatActivity {
 
