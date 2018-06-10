@@ -23,7 +23,7 @@ android {
         debug {
             externalNativeBuild {
                 cmake {
-                    cppFlags.add('-DNPT_CONFIG_ENABLE_LOGGING')
+                    cppFlags.add('-DNPT_CONFIG_ENABLE_LOGGING -DNPT_DEBUG')
                 }
             }
         }

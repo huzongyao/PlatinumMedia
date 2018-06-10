@@ -14,8 +14,8 @@ NPT_Result
 MediaRenderer::Start(const char *friendly_name, bool show_ip, const char *uuid,
                      unsigned int port, bool port_rebind) {
     LOGD("MediaRenderer::Start");
-    PLT_MediaRenderer *render = new PLT_MediaRenderer(friendly_name, show_ip, uuid,
-                                                      port, port_rebind);
+    PLT_MediaRenderer *render =
+            new PLT_MediaRenderer(friendly_name, show_ip, uuid, port, port_rebind);
     render->SetDelegate(mMediaCallback);
     mDevice = render;
     mUPnP.AddDevice(mDevice);
