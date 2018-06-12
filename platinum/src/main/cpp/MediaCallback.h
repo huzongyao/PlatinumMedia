@@ -10,6 +10,13 @@
 
 class MediaCallback : public PLT_MediaRendererDelegate {
 public:
+
+    MediaCallback();
+
+    virtual ~MediaCallback();
+
+    void setDevice(PLT_DeviceHostReference device);
+
     virtual NPT_Result OnGetCurrentConnectionInfo(PLT_ActionReference &action);
 
     virtual NPT_Result OnNext(PLT_ActionReference &action);
@@ -36,6 +43,8 @@ public:
 
     virtual NPT_Result OnSetMute(PLT_ActionReference &action);
 
+private:
+    PLT_DeviceHostReference mDevice;
 };
 
 
