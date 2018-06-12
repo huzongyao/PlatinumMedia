@@ -1,5 +1,5 @@
 //
-// Created by tangbull on 2018/6/6.
+// Created by huzongyao on 2018/6/6.
 //
 
 #ifndef PLATINUMMEDIA_MEDIACALLBACK_H

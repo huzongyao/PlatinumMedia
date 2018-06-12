@@ -42,3 +42,16 @@ JNI_FUNC(nStop)(JNIEnv *env, jobject instance, jlong self) {
     }
     return ret;
 }
+
+JNIEXPORT jint JNICALL
+JNI_FUNC(nDestory)(JNIEnv *env, jobject instance, jlong self) {
+    NPT_Result ret = NPT_ERROR_INVALID_STATE;
+    if (self != 0L) {
+        MediaRenderer *pRender = (MediaRenderer *) self;
+        delete pRender;
+        ret = NPT_SUCCESS;
+    } else {
+        LOGE("MediaRenderer is Null!");
+    }
+    return ret;
+}

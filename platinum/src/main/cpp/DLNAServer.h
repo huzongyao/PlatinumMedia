@@ -1,5 +1,5 @@
 //
-// Created by tangbull on 2018/6/6.
+// Created by huzongyao on 2018/6/6.
 //
 
 #ifndef PLATINUMMEDIA_DLNASERVER_H
@@ -23,6 +23,9 @@ JNI_FUNC(nStart)(JNIEnv *env, jobject instance, jlong self,
 
 JNIEXPORT jint JNICALL
 JNI_FUNC(nStop)(JNIEnv *env, jobject instance, jlong self);
+
+JNIEXPORT jint JNICALL
+JNI_FUNC(nDestory)(JNIEnv *env, jobject instance, jlong self);
 
 #ifdef __cplusplus
 }

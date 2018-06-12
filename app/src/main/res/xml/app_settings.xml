@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.hzy.platinum.media.view.SummaryEditPreference
+        android:defaultValue="@string/app_name"
+        android:key="@string/pref_server_name_key"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="@string/pref_server_name_summary"
+        android:title="@string/pref_server_name_title" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/pref_if_show_ip_key"
+        android:summary="@string/pref_if_show_ip_summary"
+        android:title="@string/pref_if_show_ip_title" />
+
+    <com.hzy.platinum.media.view.ResetUUIDPreference
+        android:key="@string/pref_uuid_key"
+        android:summary="@string/pref_uuid_summary"
+        android:title="@string/pref_uuid_title" />
+</PreferenceScreen>

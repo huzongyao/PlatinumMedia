@@ -8,16 +8,22 @@ import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.hzy.platinum.media.R;
 import com.hzy.platinum.media.activity.MainActivity;
 import com.hzy.platinum.media.instance.NotificationHelper;
+import com.hzy.platinum.media.instance.ServerInstance;
+import com.plutinosoft.platinum.ServerParams;
 
 /**
  * Created by huzongyao on 2018/6/7.
+ * The service that manage the server instance
  */
 
-public class MediaRendererService extends Service {
+public class DLNAService extends Service {
 
-    private static final String TAG = "MediaRendererService";
+    public static final String EXTRA_SERVER_PARAMS = "EXTRA_SERVER_PARAMS";
+
+    private static final String TAG = "DLNAService";
     private WifiManager.MulticastLock mMulticastLock;
     private Notification mNotification;
 
@@ -38,7 +44,8 @@ public class MediaRendererService extends Service {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         mNotification = NotificationHelper.INSTANCE
-                .getNotification(intent, "title", "content");
+                .getNotification(intent, getString(R.string.server_notification_title),
+                        getString(R.string.server_notification_text));
     }
 
     private void acquireMulticastLock() {
@@ -52,7 +59,11 @@ public class MediaRendererService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        NotificationHelper.INSTANCE.notify(mNotification);
+        ServerParams params = intent.getParcelableExtra(EXTRA_SERVER_PARAMS);
+        if (params != null) {
+            ServerInstance.INSTANCE.start(params);
+            NotificationHelper.INSTANCE.notify(mNotification);
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -62,6 +73,7 @@ public class MediaRendererService extends Service {
             mMulticastLock.release();
             mMulticastLock = null;
         }
+        ServerInstance.INSTANCE.stop();
         NotificationHelper.INSTANCE.cancel();
         super.onDestroy();
     }

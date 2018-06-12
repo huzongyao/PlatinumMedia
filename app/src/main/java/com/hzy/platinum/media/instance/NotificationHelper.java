@@ -14,6 +14,7 @@ import com.hzy.platinum.media.R;
 
 /**
  * Created by huzongyao on 2018/6/8.
+ * To manage the notifications
  */
 
 public enum NotificationHelper {
@@ -24,7 +25,7 @@ public enum NotificationHelper {
     private static final int DEFAULT_NOTIFICATION_ID = 10001;
     private NotificationManager mManager;
 
-    NotificationHelper(){
+    NotificationHelper() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Context context = Utils.getApp();
             NotificationChannel channel = new NotificationChannel(PRIMARY_CHANNEL,
@@ -47,15 +48,15 @@ public enum NotificationHelper {
                 .build();
     }
 
-    public void notify(Notification notification){
+    public void notify(Notification notification) {
         getManager().notify(DEFAULT_NOTIFICATION_ID, notification);
     }
 
-    public void cancel(){
+    public void cancel() {
         getManager().cancel(DEFAULT_NOTIFICATION_ID);
     }
 
-    public NotificationManager getManager(){
+    public NotificationManager getManager() {
         if (mManager == null) {
             mManager = (NotificationManager)
                     Utils.getApp().getSystemService(Context.NOTIFICATION_SERVICE);

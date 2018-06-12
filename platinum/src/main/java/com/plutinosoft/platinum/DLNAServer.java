@@ -9,13 +9,17 @@ import android.util.Log;
 public class DLNAServer {
 
     private static final String TAG = "DLNAServer";
-    private final long mInstanceId;
+    private long mInstanceId;
 
     public DLNAServer() {
         mInstanceId = nInit();
         if (mInstanceId == 0L) {
             Log.e(TAG, "Server init failed!");
         }
+    }
+
+    public int start(ServerParams params) {
+        return start(params.getFriendlyName(), params.isShowIp(), params.getUuid());
     }
 
     public int start(String friendlyName, boolean showIp, String uuid) {
@@ -27,14 +31,23 @@ public class DLNAServer {
         if (mInstanceId != 0L) {
             return nStart(mInstanceId, friendlyName, showIp, uuid, port, portRebind);
         }
-        return -1;
+        return NtpResult.NPT_ERROR_INVALID_STATE;
     }
 
     public int stop() {
         if (mInstanceId != 0L) {
             return nStop(mInstanceId);
         }
-        return -1;
+        return NtpResult.NPT_ERROR_INVALID_STATE;
+    }
+
+    public int destory() {
+        if (mInstanceId != 0L) {
+            int ret = nDestory(mInstanceId);
+            mInstanceId = 0L;
+            return ret;
+        }
+        return NtpResult.NPT_ERROR_INVALID_STATE;
     }
 
     /*public int command() {
@@ -47,6 +60,8 @@ public class DLNAServer {
                               String uuid, long port, boolean port_rebind);
 
     private native int nStop(long self);
+
+    private native int nDestory(long self);
 
     //private native int nCommand(long self);
 

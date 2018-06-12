@@ -1,4 +1,38 @@
 <resources>
     <string name="app_name">Platinum</string>
     <string name="notification_channel_default">Platinum</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About</string>
+    <string name="about_content" translatable="false">
+        PlatinumMedia(DLNA服务端)\n\n
+        * This is a Project for me to study DLNA Media Server Based on Platinum SDK\n
+        * Detail\n
+        Platinum UPnP SDK: https://github.com/plutinosoft/Platinum\n
+        Neptune C++ Runtime: https://github.com/plutinosoft/Neptune\n
+        Compile With Neptune-1.2.3 and Platinum-1.2.0\n
+        Build the native code with Android NDK and cmake\n\n
+        * Other Projects\n
+        https://github.com/geniusgithub/MediaRender\n
+        https://github.com/RiverrunNetwork/TV_DLNA_Server\n\n
+        More About Me\n
+        GitHub: https://huzongyao.github.io\n
+        ITEye博客：http://hzy3774.iteye.com\n
+        新浪微博: http://weibo.com/hzy3774\n\n
+        Contact To Me:\n
+        QQ: 377406997\n
+        Gmail: hzy3774@gmail.com\n
+        Foxmail: hzy3774@qq.com\n
+    </string>
+    <string name="pref_server_name_key">pref_edit_friendly_name</string>
+    <string name="pref_server_name_summary">Server Name: %s</string>
+    <string name="pref_server_name_title">Friendly Name</string>
+    <string name="pref_if_show_ip_key">pref_switch_show_ip</string>
+    <string name="pref_if_show_ip_summary">Show Server IP To Clients</string>
+    <string name="pref_if_show_ip_title">Show Ip</string>
+    <string name="pref_uuid_key">pref_text_uuid</string>
+    <string name="pref_uuid_summary">%s</string>
+    <string name="pref_uuid_title">UUID</string>
+    <string name="pref_dialog_title_uuid">Generate New UUID?</string>
+    <string name="server_notification_title">Platinum Server</string>
+    <string name="server_notification_text">DLNA Server Is Listening!</string>
 </resources>
