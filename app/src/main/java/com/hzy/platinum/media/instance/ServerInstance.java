@@ -81,6 +81,7 @@ public enum ServerInstance {
                 ServerParams serverParam = (ServerParams) param;
                 setState(State.STARTING);
                 mDLNAServer = new DLNAServer();
+                mDLNAServer.setCallback(CallbackInstance.INSTANCE.getCallback());
                 mDLNAServer.start(serverParam);
                 setState(State.RUNNING);
             }
@@ -91,7 +92,7 @@ public enum ServerInstance {
         if (mState == State.RUNNING) {
             setState(State.STOPPING);
             mDLNAServer.stop();
-            mDLNAServer.destory();
+            mDLNAServer.destroy();
             setState(State.IDLE);
             EventBus.getDefault().unregister(this);
         }

@@ -7,6 +7,7 @@
 
 
 #include <PltUPnP.h>
+#include <jni.h>
 #include "MediaCallback.h"
 
 class MediaRenderer {
@@ -23,11 +24,19 @@ public:
 
     NPT_Result Stop();
 
+    NPT_Result SetMediaDuration(const char *duration);
+
+    NPT_Result SetTimePosition(const char *position);
+
+    NPT_Result SetTransportState(const char *state);
+
 private:
     PLT_UPnP mUPnP;
     PLT_DeviceHostReference mDevice;
     MediaCallback *mMediaCallback;
     bool mIsAdded;
+
+    bool IsServiceAllOk();
 };
 
 

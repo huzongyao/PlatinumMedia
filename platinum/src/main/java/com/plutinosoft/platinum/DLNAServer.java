@@ -10,6 +10,7 @@ public class DLNAServer {
 
     private static final String TAG = "DLNAServer";
     private long mInstanceId;
+    private static DLNACallback mCallback;
 
     public DLNAServer() {
         mInstanceId = nInit();
@@ -41,29 +42,67 @@ public class DLNAServer {
         return NtpResult.NPT_ERROR_INVALID_STATE;
     }
 
-    public int destory() {
+    public int destroy() {
         if (mInstanceId != 0L) {
-            int ret = nDestory(mInstanceId);
+            int ret = nDestroy(mInstanceId);
             mInstanceId = 0L;
             return ret;
         }
         return NtpResult.NPT_ERROR_INVALID_STATE;
     }
 
-    /*public int command() {
-        return nCommand(mInstanceId);
-    }*/
+    public int setDuration(String duration) {
+        if (mInstanceId != 0L) {
+            return nSetMediaDuration(mInstanceId, duration);
+        }
+        return NtpResult.NPT_ERROR_INVALID_STATE;
+    }
 
-    private native long nInit();
+    public int setTimePosition(String position) {
+        if (mInstanceId != 0L) {
+            return nSetTimePosition(mInstanceId, position);
+        }
+        return NtpResult.NPT_ERROR_INVALID_STATE;
+    }
 
-    private native int nStart(long self, String friendly_name, boolean show_ip,
-                              String uuid, long port, boolean port_rebind);
+    public int setTransportState(String state) {
+        if (mInstanceId != 0L) {
+            return nSetTransportState(mInstanceId, state);
+        }
+        return NtpResult.NPT_ERROR_INVALID_STATE;
+    }
 
-    private native int nStop(long self);
+    public void setCallback(DLNACallback callback) {
+        mCallback = callback;
+    }
 
-    private native int nDestory(long self);
+    /**
+     * Called By native
+     *
+     * @param type   event type
+     * @param param1 param1
+     * @param param2 param2
+     */
+    private static void onNEvent(int type, String param1, String param2) {
+        if (mCallback != null) {
+            mCallback.onEvent(type, param1, param2);
+        }
+    }
 
-    //private native int nCommand(long self);
+    private static native long nInit();
+
+    private static native int nStart(long self, String friendly_name, boolean show_ip,
+                                     String uuid, long port, boolean port_rebind);
+
+    private static native int nSetMediaDuration(long self, String duration);
+
+    private static native int nSetTimePosition(long self, String position);
+
+    private static native int nSetTransportState(long self, String state);
+
+    private static native int nStop(long self);
+
+    private static native int nDestroy(long self);
 
     static {
         System.loadLibrary("platinum-jni");

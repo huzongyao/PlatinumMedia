@@ -7,6 +7,7 @@
 
 
 #include <Platinum.h>
+#include <jni.h>
 
 class MediaCallback : public PLT_MediaRendererDelegate {
 public:
@@ -45,6 +46,7 @@ public:
 
 private:
     PLT_DeviceHostReference mDevice;
+    NPT_Result DoJavaCallback(int type, const char *param1, const char *param2);
 };
 
 

@@ -27,6 +27,51 @@ MediaRenderer::Start(const char *friendly_name, bool show_ip, const char *uuid,
     return ret;
 }
 
+
+NPT_Result MediaRenderer::SetMediaDuration(const char *duration) {
+    LOGD("MediaRenderer::SetMediaDuration[%s]", duration);
+    PLT_Service *serviceAVT = NULL;
+    if (IsServiceAllOk()) {
+        NPT_String type;
+        type = "urn:schemas-upnp-org:service:AVTransport:*";
+        mDevice->FindServiceByType(type, serviceAVT);
+        NPT_Result ret;
+        ret = serviceAVT->SetStateVariable("CurrentMediaDuration", duration);
+        if (ret == NPT_SUCCESS)
+            ret = serviceAVT->SetStateVariable("CurrentTrackDuration", duration);
+        return ret;
+    }
+    return NPT_FAILURE;
+}
+
+NPT_Result MediaRenderer::SetTimePosition(const char *position) {
+    LOGD("MediaRenderer::SetTimePosition[%s]", position);
+    PLT_Service *serviceAVT = NULL;
+    if (IsServiceAllOk()) {
+        NPT_String type;
+        type = "urn:schemas-upnp-org:service:AVTransport:*";
+        mDevice->FindServiceByType(type, serviceAVT);
+        NPT_Result ret;
+        ret = serviceAVT->SetStateVariable("RelativeTimePosition", position);
+        return ret;
+    }
+    return NPT_FAILURE;
+}
+
+NPT_Result MediaRenderer::SetTransportState(const char *state) {
+    LOGD("MediaRenderer::SetTransportState[%s]", state);
+    PLT_Service *serviceAVT = NULL;
+    if (IsServiceAllOk()) {
+        NPT_String type;
+        type = "urn:schemas-upnp-org:service:AVTransport:*";
+        mDevice->FindServiceByType(type, serviceAVT);
+        NPT_Result ret;
+        ret = serviceAVT->SetStateVariable("TransportState", state);
+        return ret;
+    }
+    return NPT_FAILURE;
+}
+
 NPT_Result
 MediaRenderer::Stop() {
     LOGD("MediaRenderer::Stop");
@@ -40,3 +85,30 @@ MediaRenderer::~MediaRenderer() {
     LOGD("MediaRenderer::~MediaRenderer");
     delete mMediaCallback;
 }
+
+bool MediaRenderer::IsServiceAllOk() {
+    PLT_Service *serviceAVT = NULL;
+    PLT_Service *serviceCMR;
+    PLT_Service *serviceRC;
+    NPT_String type;
+    if (!mDevice->GetType().StartsWith("urn:schemas-upnp-org:device:MediaRenderer")) {
+        return false;
+    }
+    type = "urn:schemas-upnp-org:service:AVTransport:*";
+    if (NPT_FAILED(mDevice->FindServiceByType(type, serviceAVT))) {
+        LOGW("Service %s not found!", (const char *) type);
+        return false;
+    }
+    type = "urn:schemas-upnp-org:service:ConnectionManager:*";
+    if (NPT_FAILED(mDevice->FindServiceByType(type, serviceCMR))) {
+        LOGW("Service %s not found!", (const char *) type);
+        return false;
+    }
+    type = "urn:schemas-upnp-org:service:RenderingControl:*";
+    if (NPT_FAILED(mDevice->FindServiceByType(type, serviceRC))) {
+        LOGW("Service %s not found!", (const char *) type);
+        return false;
+    }
+    return true;
+}
+
