@@ -35,7 +35,7 @@ NPT_Result MediaRenderer::SetupServices() {
 NPT_Result MediaRenderer::OnNext(PLT_ActionReference &action) {
     LOGD("MediaRenderer::OnNext()");
     NPT_String uri, meta;
-    PLT_Service* service;
+    PLT_Service *service;
     NPT_CHECK_SEVERE(FindServiceByType("urn:schemas-upnp-org:service:AVTransport:1", service));
     NPT_CHECK_SEVERE(action->GetArgumentValue("NextURI", uri));
     NPT_CHECK_SEVERE(action->GetArgumentValue("NextURIMetaData", meta));
@@ -49,7 +49,11 @@ NPT_Result MediaRenderer::OnNext(PLT_ActionReference &action) {
 
 NPT_Result MediaRenderer::OnPause(PLT_ActionReference &action) {
     LOGD("MediaRenderer::OnPause()");
+    PLT_Service *service;
     DoJavaCallback(CALLBACK_EVENT_ON_PAUSE, "", "");
+    NPT_CHECK_SEVERE(FindServiceByType("urn:schemas-upnp-org:service:AVTransport:1", service));
+    service->SetStateVariable("TransportState", "PAUSED_PLAYBACK");
+    service->SetStateVariable("TransportStatus", "OK");
     return NPT_SUCCESS;
 }
 
@@ -61,7 +65,11 @@ NPT_Result MediaRenderer::OnPrevious(PLT_ActionReference &action) {
 
 NPT_Result MediaRenderer::OnStop(PLT_ActionReference &action) {
     LOGD("MediaRenderer::OnStop()");
+    PLT_Service *service;
     DoJavaCallback(CALLBACK_EVENT_ON_STOP, "", "");
+    NPT_CHECK_SEVERE(FindServiceByType("urn:schemas-upnp-org:service:AVTransport:1", service));
+    service->SetStateVariable("TransportState", "STOPPED");
+    service->SetStateVariable("TransportStatus", "OK");
     return NPT_SUCCESS;
 }
 
@@ -171,7 +179,7 @@ NPT_Result MediaRenderer::PlayMedia(const NPT_String &uri, const NPT_String &met
                 DoJavaCallback(CALLBACK_EVENT_ON_PLAY_PHOTO, uri.GetChars(), meta.GetChars());
             }
         }
-    } else{
+    } else {
         DoJavaCallback(CALLBACK_EVENT_ON_PLAY, uri.GetChars(), meta.GetChars());
     }
     return NPT_SUCCESS;

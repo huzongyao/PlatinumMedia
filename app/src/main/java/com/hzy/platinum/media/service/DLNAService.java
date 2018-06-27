@@ -85,7 +85,7 @@ public class DLNAService extends Service {
             mMulticastLock.release();
             mMulticastLock = null;
         }
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().unregister(this);
         ServerInstance.INSTANCE.stop();
         NotificationHelper.INSTANCE.cancel();
         super.onDestroy();
