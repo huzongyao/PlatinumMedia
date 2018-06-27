@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.hzy.platinum.media.event.ServerAsyncEvent;
 import com.hzy.platinum.media.event.ServerStateEvent;
-import com.plutinosoft.platinum.DLNAServer;
+import com.plutinosoft.platinum.DLNABridge;
 import com.plutinosoft.platinum.ServerParams;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,7 +23,7 @@ public enum ServerInstance {
     private static final String TAG = "ServerInstance";
 
     private volatile State mState = State.IDLE;
-    private DLNAServer mDLNAServer;
+    private DLNABridge mDLNAServer;
 
     ServerInstance() {
         Log.d(TAG, "Init!");
@@ -80,7 +80,7 @@ public enum ServerInstance {
             if (param != null && param instanceof ServerParams) {
                 ServerParams serverParam = (ServerParams) param;
                 setState(State.STARTING);
-                mDLNAServer = new DLNAServer();
+                mDLNAServer = new DLNABridge();
                 mDLNAServer.setCallback(CallbackInstance.INSTANCE.getCallback());
                 mDLNAServer.start(serverParam);
                 setState(State.RUNNING);

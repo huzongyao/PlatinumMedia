@@ -1,59 +1,28 @@
 //
-// Created by huzongyao on 2018/6/6.
+// Created by huzongyao on 2018/6/27.
 //
 
 #ifndef PLATINUMMEDIA_DLNASERVER_H
 #define PLATINUMMEDIA_DLNASERVER_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-#include <jni.h>
+#include <PltUPnP.h>
 
-#define JNI_FUNC(x) Java_com_plutinosoft_platinum_DLNAServer_##x
+class DLNAServer {
+public:
+    DLNAServer();
 
-#define CALLBACK_CLASS "com/plutinosoft/platinum/DLNAServer"
-#define CALLBACK_METHOD "onNEvent"
-#define CALLBACK_SIGN "(ILjava/lang/String;Ljava/lang/String;)V"
+    ~DLNAServer();
 
-extern JavaVM *g_vm;
-extern jclass g_callbackClass;
-extern jmethodID g_callbackMethod;
+    NPT_Result Start(const char *friendly_name, bool show_ip = false, const char *uuid = NULL,
+                     unsigned int port = 0, bool port_rebind = false);
 
-JNIEXPORT jint JNICALL
-JNI_OnLoad(JavaVM *vm, void *reserved);
+    NPT_Result Stop();
 
-JNIEXPORT void JNICALL
-JNI_OnUnload(JavaVM *vm, void *reserved);
+private:
+    PLT_UPnP mUPnP;
+    PLT_DeviceHostReference mDevice;
+};
 
-JNIEXPORT jlong JNICALL
-JNI_FUNC(nInit)(JNIEnv *env, jclass type);
 
-JNIEXPORT jint JNICALL
-JNI_FUNC(nStart)(JNIEnv *env, jclass type, jlong self,
-                 jstring friendly_name_, jboolean show_ip,
-                 jstring uuid_, jlong port, jboolean port_rebind);
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nSetMediaDuration)(JNIEnv *env, jclass type, jlong self,
-                            jstring duration_);
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nSetTimePosition)(JNIEnv *env, jclass type, jlong self,
-                           jstring position_);
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nSetTransportState)(JNIEnv *env, jclass type, jlong self,
-                             jstring state_);
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nStop)(JNIEnv *env, jclass type, jlong self);
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nDestroy)(JNIEnv *env, jclass type, jlong self);
-
-#ifdef __cplusplus
-}
-#endif
 #endif //PLATINUMMEDIA_DLNASERVER_H

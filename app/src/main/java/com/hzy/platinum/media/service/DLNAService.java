@@ -7,12 +7,18 @@ import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.hzy.platinum.media.R;
 import com.hzy.platinum.media.activity.MainActivity;
+import com.hzy.platinum.media.event.NativeAsyncEvent;
 import com.hzy.platinum.media.instance.NotificationHelper;
 import com.hzy.platinum.media.instance.ServerInstance;
 import com.plutinosoft.platinum.ServerParams;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by huzongyao on 2018/6/7.
@@ -38,6 +44,7 @@ public class DLNAService extends Service {
         super.onCreate();
         acquireMulticastLock();
         buildNotification();
+        EventBus.getDefault().register(this);
     }
 
     private void buildNotification() {
@@ -67,12 +74,18 @@ public class DLNAService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    public void onServerStateChange(NativeAsyncEvent event) {
+        Log.d("TAG", event.getType() + event.getParan1() + event.getParam2());
+    }
+
     @Override
     public void onDestroy() {
         if (mMulticastLock != null) {
             mMulticastLock.release();
             mMulticastLock = null;
         }
+        EventBus.getDefault().register(this);
         ServerInstance.INSTANCE.stop();
         NotificationHelper.INSTANCE.cancel();
         super.onDestroy();

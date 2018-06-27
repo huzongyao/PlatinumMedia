@@ -6,37 +6,51 @@
 #define PLATINUMMEDIA_MEDIARENDER_H
 
 
-#include <PltUPnP.h>
+#include <Platinum.h>
+#include <PltMediaRenderer.h>
 #include <jni.h>
-#include "MediaCallback.h"
 
-class MediaRenderer {
+class MediaRenderer : public PLT_MediaRenderer {
 public:
-    MediaRenderer();
+    MediaRenderer(const char *friendly_name,
+                  bool show_ip = false,
+                  const char *uuid = NULL,
+                  unsigned int port = 0,
+                  bool port_rebind = false);
 
-    ~MediaRenderer();
+    ~MediaRenderer() override;
 
-    NPT_Result Start(const char *friendly_name,
-                     bool show_ip     /* = false */,
-                     const char *uuid        /* = NULL */,
-                     unsigned int port        /* = 0 */,
-                     bool port_rebind /* = false */);
+    // Http server handler
+    NPT_Result
+    ProcessHttpGetRequest(NPT_HttpRequest &request, const NPT_HttpRequestContext &context,
+                          NPT_HttpResponse &response) override;
 
-    NPT_Result Stop();
+    // AVTransport methods
+    NPT_Result OnNext(PLT_ActionReference &action) override;
 
-    NPT_Result SetMediaDuration(const char *duration);
+    NPT_Result OnPause(PLT_ActionReference &action) override;
 
-    NPT_Result SetTimePosition(const char *position);
+    NPT_Result OnPlay(PLT_ActionReference &action) override;
 
-    NPT_Result SetTransportState(const char *state);
+    NPT_Result OnPrevious(PLT_ActionReference &action) override;
+
+    NPT_Result OnStop(PLT_ActionReference &action) override;
+
+    NPT_Result OnSeek(PLT_ActionReference &action) override;
+
+    NPT_Result OnSetAVTransportURI(PLT_ActionReference &action) override;
+
+    // RenderingControl methods
+    NPT_Result OnSetVolume(PLT_ActionReference &action) override;
+
+    NPT_Result OnSetMute(PLT_ActionReference &action) override;
 
 private:
-    PLT_UPnP mUPnP;
-    PLT_DeviceHostReference mDevice;
-    MediaCallback *mMediaCallback;
-    bool mIsAdded;
+    NPT_Result SetupServices() override;
 
-    bool IsServiceAllOk();
+    NPT_Result PlayMedia(const NPT_String& uri, const NPT_String& meta);
+
+    NPT_Result DoJavaCallback(int type, const char *param1, const char *param2);
 };
 
 

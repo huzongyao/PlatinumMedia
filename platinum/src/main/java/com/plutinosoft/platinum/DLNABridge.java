@@ -6,13 +6,13 @@ import android.util.Log;
  * Created by huzongyao on 2018/6/6.
  */
 
-public class DLNAServer {
+public class DLNABridge {
 
     private static final String TAG = "DLNAServer";
     private long mInstanceId;
     private static DLNACallback mCallback;
 
-    public DLNAServer() {
+    public DLNABridge() {
         mInstanceId = nInit();
         if (mInstanceId == 0L) {
             Log.e(TAG, "Server init failed!");
