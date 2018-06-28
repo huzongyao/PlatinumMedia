@@ -7,13 +7,15 @@ package com.hzy.platinum.media.event;
 
 public class NativeAsyncEvent {
     private int type;
-    private String paran1;
+    private String param1;
     private String param2;
+    private String param3;
 
-    public NativeAsyncEvent(int type, String paran1, String param2) {
+    public NativeAsyncEvent(int type, String paran1, String param2, String param3) {
         this.type = type;
-        this.paran1 = paran1;
+        this.param1 = paran1;
         this.param2 = param2;
+        this.param3 = param3;
     }
 
     public int getType() {
@@ -24,12 +26,12 @@ public class NativeAsyncEvent {
         this.type = type;
     }
 
-    public String getParan1() {
-        return paran1;
+    public String getParam1() {
+        return param1;
     }
 
-    public void setParan1(String paran1) {
-        this.paran1 = paran1;
+    public void setParam1(String param1) {
+        this.param1 = param1;
     }
 
     public String getParam2() {
@@ -38,5 +40,13 @@ public class NativeAsyncEvent {
 
     public void setParam2(String param2) {
         this.param2 = param2;
+    }
+
+    public String getParam3() {
+        return param3;
+    }
+
+    public void setParam3(String param3) {
+        this.param3 = param3;
     }
 }

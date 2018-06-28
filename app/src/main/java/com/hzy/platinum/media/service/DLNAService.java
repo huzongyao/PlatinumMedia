@@ -76,7 +76,8 @@ public class DLNAService extends Service {
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     public void onServerStateChange(NativeAsyncEvent event) {
-        Log.d("TAG", event.getType() + event.getParan1() + event.getParam2());
+        Log.d("TAG", event.getType() + "\n" + event.getParam1() + "\n"
+                + event.getParam2() + "\n" + event.getParam3());
     }
 
     @Override

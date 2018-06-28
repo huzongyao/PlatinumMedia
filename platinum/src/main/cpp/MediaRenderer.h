@@ -48,9 +48,20 @@ public:
 private:
     NPT_Result SetupServices() override;
 
-    NPT_Result PlayMedia(const NPT_String& uri, const NPT_String& meta);
+    NPT_Result PlayMedia(const NPT_String &uri, const NPT_String &meta);
 
-    NPT_Result DoJavaCallback(int type, const char *param1, const char *param2);
+    /**
+     * Call Java Static function
+     * @param type
+     * @param param1
+     * @param param2
+     * @param param3
+     * @return
+     */
+    NPT_Result DoJavaCallback(int type,
+                              const char *param1 = "",
+                              const char *param2 = "",
+                              const char *param3 = "");
 };
 
 

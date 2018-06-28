@@ -17,8 +17,8 @@ public enum CallbackInstance {
     private final DLNACallback mCallback;
 
     CallbackInstance() {
-        mCallback = (type, param1, param2) ->
-                EventBus.getDefault().post(new NativeAsyncEvent(type, param1, param2));
+        mCallback = (type, param1, param2, param3) ->
+                EventBus.getDefault().post(new NativeAsyncEvent(type, param1, param2, param3));
     }
 
     public DLNACallback getCallback() {

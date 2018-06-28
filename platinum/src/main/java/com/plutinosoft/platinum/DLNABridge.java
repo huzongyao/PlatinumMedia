@@ -83,9 +83,9 @@ public class DLNABridge {
      * @param param1 param1
      * @param param2 param2
      */
-    private static void onNEvent(int type, String param1, String param2) {
+    private static void onNEvent(int type, String param1, String param2, String param3) {
         if (mCallback != null) {
-            mCallback.onEvent(type, param1, param2);
+            mCallback.onEvent(type, param1, param2, param3);
         }
     }
 

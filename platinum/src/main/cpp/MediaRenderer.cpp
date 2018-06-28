@@ -42,7 +42,7 @@ NPT_Result MediaRenderer::OnNext(PLT_ActionReference &action) {
     service->SetStateVariable("NextAVTransportURI", uri);
     service->SetStateVariable("NextAVTransportURIMetaData", meta);
     NPT_CHECK_SEVERE(action->SetArgumentsOutFromStateVariable());
-    DoJavaCallback(CALLBACK_EVENT_ON_NEXT, "", "");
+    DoJavaCallback(CALLBACK_EVENT_ON_NEXT);
     PlayMedia(uri, meta);
     return NPT_SUCCESS;
 }
@@ -50,7 +50,7 @@ NPT_Result MediaRenderer::OnNext(PLT_ActionReference &action) {
 NPT_Result MediaRenderer::OnPause(PLT_ActionReference &action) {
     LOGD("MediaRenderer::OnPause()");
     PLT_Service *service;
-    DoJavaCallback(CALLBACK_EVENT_ON_PAUSE, "", "");
+    DoJavaCallback(CALLBACK_EVENT_ON_PAUSE);
     NPT_CHECK_SEVERE(FindServiceByType("urn:schemas-upnp-org:service:AVTransport:1", service));
     service->SetStateVariable("TransportState", "PAUSED_PLAYBACK");
     service->SetStateVariable("TransportStatus", "OK");
@@ -59,14 +59,14 @@ NPT_Result MediaRenderer::OnPause(PLT_ActionReference &action) {
 
 NPT_Result MediaRenderer::OnPrevious(PLT_ActionReference &action) {
     LOGD("MediaRenderer::OnPrevious()");
-    DoJavaCallback(CALLBACK_EVENT_ON_PREVIOUS, "", "");
+    DoJavaCallback(CALLBACK_EVENT_ON_PREVIOUS);
     return NPT_SUCCESS;
 }
 
 NPT_Result MediaRenderer::OnStop(PLT_ActionReference &action) {
     LOGD("MediaRenderer::OnStop()");
     PLT_Service *service;
-    DoJavaCallback(CALLBACK_EVENT_ON_STOP, "", "");
+    DoJavaCallback(CALLBACK_EVENT_ON_STOP);
     NPT_CHECK_SEVERE(FindServiceByType("urn:schemas-upnp-org:service:AVTransport:1", service));
     service->SetStateVariable("TransportState", "STOPPED");
     service->SetStateVariable("TransportStatus", "OK");
@@ -109,7 +109,7 @@ NPT_Result MediaRenderer::OnSeek(PLT_ActionReference &action) {
         NPT_UInt32 seconds;
         NPT_CHECK_SEVERE(PLT_Didl::ParseTimeStamp(target, seconds));
         const char *secondString = NPT_String::FromInteger(seconds).GetChars();
-        DoJavaCallback(CALLBACK_EVENT_ON_SEEK, secondString, "");
+        DoJavaCallback(CALLBACK_EVENT_ON_SEEK, unit, target, secondString);
     }
     return NPT_SUCCESS;
 }
@@ -139,7 +139,7 @@ NPT_Result MediaRenderer::OnSetVolume(PLT_ActionReference &action) {
     LOGD("MediaRenderer::OnSetVolume()");
     NPT_String volume;
     NPT_CHECK_SEVERE(action->GetArgumentValue("DesiredVolume", volume));
-    DoJavaCallback(CALLBACK_EVENT_ON_SET_VOLUME, volume.GetChars(), "");
+    DoJavaCallback(CALLBACK_EVENT_ON_SET_VOLUME, volume.GetChars());
     return NPT_SUCCESS;
 }
 
@@ -147,7 +147,7 @@ NPT_Result MediaRenderer::OnSetMute(PLT_ActionReference &action) {
     LOGD("MediaRenderer::OnSetMute()");
     NPT_String mute;
     NPT_CHECK_SEVERE(action->GetArgumentValue("DesiredMute", mute));
-    DoJavaCallback(CALLBACK_EVENT_ON_SET_MUTE, mute.GetChars(), "");
+    DoJavaCallback(CALLBACK_EVENT_ON_SET_MUTE, mute.GetChars());
     return NPT_SUCCESS;
 }
 
@@ -167,25 +167,34 @@ NPT_Result MediaRenderer::ProcessHttpGetRequest(NPT_HttpRequest &request,
 NPT_Result MediaRenderer::PlayMedia(const NPT_String &uri, const NPT_String &meta) {
     PLT_MediaObjectListReference list;
     PLT_MediaObject *object = NULL;
+    if (uri.IsEmpty()) {
+        LOGW("MediaRenderer::PlayMedia URL is NULL!");
+        return NPT_FAILURE;
+    }
+    NPT_Url url = NPT_Url(url);
+    const char *mimeType = PLT_MimeType::GetMimeType(url.GetPath(), NULL);
+    int playType = CALLBACK_EVENT_ON_PLAY;
+
     if (NPT_SUCCEEDED(PLT_Didl::FromDidl(meta, list))) {
         list->Get(0, object);
         NPT_String ObjectClass = object->m_ObjectClass.type.ToLowercase();
         if (!object->IsContainer()) {
             if (ObjectClass.StartsWith("object.item.videoitem")) {
-                DoJavaCallback(CALLBACK_EVENT_ON_PLAY_VIDEO, uri.GetChars(), meta.GetChars());
+                playType = CALLBACK_EVENT_ON_PLAY_VIDEO;
             } else if (ObjectClass.StartsWith("object.item.audioitem")) {
-                DoJavaCallback(CALLBACK_EVENT_ON_PLAY_AUDIO, uri.GetChars(), meta.GetChars());
+                playType = CALLBACK_EVENT_ON_PLAY_AUDIO;
             } else if (ObjectClass.StartsWith("object.item.imageitem")) {
-                DoJavaCallback(CALLBACK_EVENT_ON_PLAY_PHOTO, uri.GetChars(), meta.GetChars());
+                playType = CALLBACK_EVENT_ON_PLAY_PHOTO;
             }
         }
-    } else {
-        DoJavaCallback(CALLBACK_EVENT_ON_PLAY, uri.GetChars(), meta.GetChars());
     }
+    DoJavaCallback(playType, uri.GetChars(), meta.GetChars(), mimeType);
     return NPT_SUCCESS;
 }
 
-NPT_Result MediaRenderer::DoJavaCallback(int type, const char *param1, const char *param2) {
+NPT_Result MediaRenderer::DoJavaCallback(int type, const char *param1,
+                                         const char *param2,
+                                         const char *param3) {
     if (g_vm == NULL) {
         LOGE("g_vm = NULL!!!");
         return NPT_FAILURE;
@@ -204,6 +213,7 @@ NPT_Result MediaRenderer::DoJavaCallback(int type, const char *param1, const cha
     }
     jstring jParam1 = NULL;
     jstring jParam2 = NULL;
+    jstring jParam3 = NULL;
     jclass inflectClass = g_callbackClass;
     jmethodID inflectMethod = g_callbackMethod;
     if (inflectClass == NULL || inflectMethod == NULL) {
@@ -212,9 +222,11 @@ NPT_Result MediaRenderer::DoJavaCallback(int type, const char *param1, const cha
     //LOGD("TYPE: %d\nPARAM1: %s\nPARAM1: %s", type, param1, param2);
     jParam1 = env->NewStringUTF(param1);
     jParam2 = env->NewStringUTF(param2);
-    env->CallStaticVoidMethod(inflectClass, inflectMethod, type, jParam1, jParam2);
+    jParam3 = env->NewStringUTF(param3);
+    env->CallStaticVoidMethod(inflectClass, inflectMethod, type, jParam1, jParam2, jParam3);
     env->DeleteLocalRef(jParam1);
     env->DeleteLocalRef(jParam2);
+    env->DeleteLocalRef(jParam3);
     end:
     if (env->ExceptionOccurred()) {
         env->ExceptionDescribe();

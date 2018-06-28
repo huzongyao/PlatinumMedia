@@ -15,7 +15,7 @@ extern "C" {
 
 #define CALLBACK_CLASS "com/plutinosoft/platinum/DLNABridge"
 #define CALLBACK_METHOD "onNEvent"
-#define CALLBACK_SIGN "(ILjava/lang/String;Ljava/lang/String;)V"
+#define CALLBACK_SIGN "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
 
 extern JavaVM *g_vm;
 extern jclass g_callbackClass;
