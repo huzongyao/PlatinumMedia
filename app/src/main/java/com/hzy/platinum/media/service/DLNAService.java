@@ -7,13 +7,14 @@ import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.hzy.platinum.media.R;
 import com.hzy.platinum.media.activity.MainActivity;
 import com.hzy.platinum.media.event.NativeAsyncEvent;
 import com.hzy.platinum.media.instance.NotificationHelper;
 import com.hzy.platinum.media.instance.ServerInstance;
+import com.hzy.platinum.media.media.MediaUtils;
+import com.plutinosoft.platinum.CallbackTypes;
 import com.plutinosoft.platinum.ServerParams;
 
 import org.greenrobot.eventbus.EventBus;
@@ -74,10 +75,16 @@ public class DLNAService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     public void onServerStateChange(NativeAsyncEvent event) {
-        Log.d("TAG", event.getType() + "\n" + event.getParam1() + "\n"
-                + event.getParam2() + "\n" + event.getParam3());
+        switch (event.type) {
+            case CallbackTypes.CALLBACK_EVENT_ON_PLAY:
+                MediaUtils.startPlayMedia(this, event.mediaInfo);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

@@ -16,7 +16,4 @@ public class CallbackTypes {
     public static final int CALLBACK_EVENT_ON_SET_PLAY_MODE = 1008;
     public static final int CALLBACK_EVENT_ON_SET_VOLUME = 1009;
     public static final int CALLBACK_EVENT_ON_SET_MUTE = 1010;
-    public static final int CALLBACK_EVENT_ON_PLAY_VIDEO = 1011;
-    public static final int CALLBACK_EVENT_ON_PLAY_AUDIO = 1012;
-    public static final int CALLBACK_EVENT_ON_PLAY_PHOTO = 1013;
 }

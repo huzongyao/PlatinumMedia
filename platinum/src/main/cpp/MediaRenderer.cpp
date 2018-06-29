@@ -42,8 +42,7 @@ NPT_Result MediaRenderer::OnNext(PLT_ActionReference &action) {
     service->SetStateVariable("NextAVTransportURI", uri);
     service->SetStateVariable("NextAVTransportURIMetaData", meta);
     NPT_CHECK_SEVERE(action->SetArgumentsOutFromStateVariable());
-    DoJavaCallback(CALLBACK_EVENT_ON_NEXT);
-    PlayMedia(uri, meta);
+    DoJavaCallback(CALLBACK_EVENT_ON_NEXT, uri, meta);
     return NPT_SUCCESS;
 }
 
@@ -85,7 +84,7 @@ NPT_Result MediaRenderer::OnPlay(PLT_ActionReference &action) {
     service->SetStateVariable("TransportState", "TRANSITIONING");
     service->SetStateVariable("TransportStatus", "OK");
     // parse meta data and play media
-    PlayMedia(uri, meta);
+    DoJavaCallback(CALLBACK_EVENT_ON_PLAY, uri, meta);
     // just return success because the play actions are asynchronous
     service->SetStateVariable("TransportState", "PLAYING");
     service->SetStateVariable("TransportStatus", "OK");
@@ -162,34 +161,6 @@ NPT_Result MediaRenderer::ProcessHttpGetRequest(NPT_HttpRequest &request,
     LOGD("Http: IP: %s\nMethod: %s\nProtocol: %s\nUrl: %s",
          ip_address.GetChars(), method.GetChars(), protocol.GetChars(), url.ToString().GetChars());
     return PLT_DeviceHost::ProcessHttpGetRequest(request, context, response);
-}
-
-NPT_Result MediaRenderer::PlayMedia(const NPT_String &uri, const NPT_String &meta) {
-    PLT_MediaObjectListReference list;
-    PLT_MediaObject *object = NULL;
-    if (uri.IsEmpty()) {
-        LOGW("MediaRenderer::PlayMedia URL is NULL!");
-        return NPT_FAILURE;
-    }
-    NPT_Url url = NPT_Url(url);
-    const char *mimeType = PLT_MimeType::GetMimeType(url.GetPath(), NULL);
-    int playType = CALLBACK_EVENT_ON_PLAY;
-
-    if (NPT_SUCCEEDED(PLT_Didl::FromDidl(meta, list))) {
-        list->Get(0, object);
-        NPT_String ObjectClass = object->m_ObjectClass.type.ToLowercase();
-        if (!object->IsContainer()) {
-            if (ObjectClass.StartsWith("object.item.videoitem")) {
-                playType = CALLBACK_EVENT_ON_PLAY_VIDEO;
-            } else if (ObjectClass.StartsWith("object.item.audioitem")) {
-                playType = CALLBACK_EVENT_ON_PLAY_AUDIO;
-            } else if (ObjectClass.StartsWith("object.item.imageitem")) {
-                playType = CALLBACK_EVENT_ON_PLAY_PHOTO;
-            }
-        }
-    }
-    DoJavaCallback(playType, uri.GetChars(), meta.GetChars(), mimeType);
-    return NPT_SUCCESS;
 }
 
 NPT_Result MediaRenderer::DoJavaCallback(int type, const char *param1,

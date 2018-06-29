@@ -57,6 +57,7 @@ public enum ServerInstance {
         STOPPING
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     @Subscribe(threadMode = ThreadMode.ASYNC)
     public void startAsyncTask(ServerAsyncEvent event) {
         switch (event.getType()) {

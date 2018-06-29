@@ -1,15 +1,18 @@
 package com.hzy.platinum.media.event;
 
+import com.hzy.platinum.media.media.MediaInfo;
+
 /**
  * Created by huzongyao on 2018/6/22.
  * native events, post on work thread
  */
 
 public class NativeAsyncEvent {
-    private int type;
-    private String param1;
-    private String param2;
-    private String param3;
+    public int type;
+    public String param1;
+    public String param2;
+    public String param3;
+    public MediaInfo mediaInfo;
 
     public NativeAsyncEvent(int type, String paran1, String param2, String param3) {
         this.type = type;
@@ -18,35 +21,8 @@ public class NativeAsyncEvent {
         this.param3 = param3;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
+    public NativeAsyncEvent(int type, MediaInfo mediaInfo) {
         this.type = type;
-    }
-
-    public String getParam1() {
-        return param1;
-    }
-
-    public void setParam1(String param1) {
-        this.param1 = param1;
-    }
-
-    public String getParam2() {
-        return param2;
-    }
-
-    public void setParam2(String param2) {
-        this.param2 = param2;
-    }
-
-    public String getParam3() {
-        return param3;
-    }
-
-    public void setParam3(String param3) {
-        this.param3 = param3;
+        this.mediaInfo = mediaInfo;
     }
 }

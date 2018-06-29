@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         setFabStatus(state);
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     public void onServerStateChange(ServerStateEvent event) {
         ServerInstance.State state = event.getState();

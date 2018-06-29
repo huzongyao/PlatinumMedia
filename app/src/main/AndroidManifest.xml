@@ -34,6 +34,7 @@
         <activity
             android:name=".activity.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.VideoActivity" />
     </application>
 
 </manifest>

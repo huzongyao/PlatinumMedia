@@ -48,10 +48,18 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.blankj:utilcode:1.16.3'
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.google.android.exoplayer:exoplayer:2.8.1'
+    implementation 'com.devbrackets.android:exomedia:4.2.1'
+    implementation "com.google.android.exoplayer:extension-okhttp:2.8.1"
+    implementation('org.simpleframework:simple-xml:2.7.1') {
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+        exclude group: 'xpp3', module: 'xpp3'
+    }
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     implementation project(':platinum')
 }
