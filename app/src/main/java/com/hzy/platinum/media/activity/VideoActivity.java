@@ -7,9 +7,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.devbrackets.android.exomedia.listener.OnPreparedListener;
+import com.devbrackets.android.exomedia.ui.widget.VideoControls;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.hzy.platinum.media.R;
 import com.hzy.platinum.media.media.MediaInfo;
+import com.hzy.platinum.media.media.MediaUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,14 +21,13 @@ import butterknife.ButterKnife;
  * Created by huzongyao on 2018/6/29.
  */
 
-public class VideoActivity extends AppCompatActivity {
-
-    public static final String EXTRA_MEDIA_INFO = "EXTRA_MEDIA_INFO";
+public class VideoActivity extends AppCompatActivity
+        implements OnPreparedListener {
 
     @BindView(R.id.video_view)
     VideoView mVideoView;
 
-    MediaInfo mMediaInfo;
+    private MediaInfo mMediaInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,12 +38,24 @@ public class VideoActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
+        initVideoPlayer();
+        mMediaInfo = getIntent().getParcelableExtra(MediaUtils.EXTRA_MEDIA_INFO);
+        startPlayCurrentMedia();
+    }
+
+    private void initVideoPlayer() {
         mVideoView.setHandleAudioFocus(false);
-        mMediaInfo = getIntent().getParcelableExtra(EXTRA_MEDIA_INFO);
+        mVideoView.setOnPreparedListener(this);
+    }
+
+    private void startPlayCurrentMedia() {
         if (mMediaInfo != null) {
+            VideoControls videoControls = mVideoView.getVideoControls();
+            if (videoControls != null) {
+                videoControls.setTitle(mMediaInfo.title);
+            }
             Uri uri = Uri.parse(mMediaInfo.url);
             mVideoView.setVideoURI(uri);
-            mVideoView.start();
         }
     }
 
@@ -53,5 +67,12 @@ public class VideoActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPrepared() {
+        if (!mVideoView.isPlaying()) {
+            mVideoView.start();
+        }
     }
 }

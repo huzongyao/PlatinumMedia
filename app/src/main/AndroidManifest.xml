@@ -35,6 +35,7 @@
             android:name=".activity.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.VideoActivity" />
+        <activity android:name=".activity.AudioActivity" />
     </application>
 
 </manifest>

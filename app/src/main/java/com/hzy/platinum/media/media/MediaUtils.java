@@ -14,6 +14,7 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
+import com.hzy.platinum.media.activity.AudioActivity;
 import com.hzy.platinum.media.activity.VideoActivity;
 
 import java.io.File;
@@ -26,6 +27,8 @@ import okhttp3.OkHttpClient;
 
 public class MediaUtils {
 
+    public static final String EXTRA_MEDIA_INFO = "EXTRA_MEDIA_INFO";
+
     public static void startPlayMedia(Context context, MediaInfo mediaInfo) {
         if (mediaInfo == null) {
             return;
@@ -33,10 +36,13 @@ public class MediaUtils {
         switch (mediaInfo.mediaType) {
             case TYPE_VIDEO:
                 Intent intent = new Intent(context, VideoActivity.class);
-                intent.putExtra(VideoActivity.EXTRA_MEDIA_INFO, mediaInfo);
+                intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
                 context.startActivity(intent);
                 break;
             case TYPE_AUDIO:
+                intent = new Intent(context, AudioActivity.class);
+                intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
+                context.startActivity(intent);
                 break;
         }
     }

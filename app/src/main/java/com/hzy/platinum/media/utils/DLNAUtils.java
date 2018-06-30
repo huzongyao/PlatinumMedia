@@ -45,9 +45,11 @@ public class DLNAUtils {
                 e.printStackTrace();
             }
             String objectClass;
-            if (didlLite != null && didlLite.item != null) {
-                mediaInfo.title = didlLite.item.title;
-                if ((objectClass = didlLite.item.objectClass) != null) {
+            DIDLLite.MediaItem objectItem;
+            if (didlLite != null && (objectItem = didlLite.item) != null) {
+                mediaInfo.title = objectItem.title;
+                mediaInfo.albumArtURI = objectItem.albumArtURI;
+                if ((objectClass = objectItem.objectClass) != null) {
                     if (objectClass.startsWith(OBJECT_CLASS_VIDEO)) {
                         mediaType = MediaType.TYPE_VIDEO;
                     } else if (objectClass.startsWith(OBJECT_CLASS_AUDIO)) {

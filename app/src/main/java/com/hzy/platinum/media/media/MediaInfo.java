@@ -12,6 +12,7 @@ public class MediaInfo implements Parcelable {
     public MediaType mediaType;
     public String title;
     public String url;
+    public String albumArtURI;
 
     public MediaInfo() {
     }
@@ -19,12 +20,14 @@ public class MediaInfo implements Parcelable {
     protected MediaInfo(Parcel in) {
         title = in.readString();
         url = in.readString();
+        albumArtURI = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(url);
+        dest.writeString(albumArtURI);
     }
 
     @Override

@@ -26,6 +26,10 @@ public enum CallbackInstance {
 
     CallbackInstance() {
         mCallback = (type, param1, param2, param3) -> {
+            Log.d(TAG, "type: " + type
+                    + "\nparam1: " + param1
+                    + "\nparam2: " + param2
+                    + "\nparam3: " + param3);
             switch (type) {
                 case CallbackTypes.CALLBACK_EVENT_ON_PLAY:
                     startPlayMedia(type, param1, param2);
