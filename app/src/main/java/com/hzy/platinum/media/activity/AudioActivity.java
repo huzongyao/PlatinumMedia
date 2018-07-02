@@ -66,12 +66,12 @@ public class AudioActivity extends AppCompatActivity
     }
 
     private void initAudioPlayer() {
+        mGlide = Glide.with(this);
         mAudioPlayer = new AudioPlayer(getApplicationContext());
         mAudioPlayer.setOnPreparedListener(this);
     }
 
     private void startPlayCurrentMedia() {
-        mGlide = Glide.with(this);
         if (mMediaInfo != null) {
             Uri artUri = Uri.parse(mMediaInfo.albumArtURI);
             mGlide.load(artUri).into(mAudioPlayerImage);

@@ -15,6 +15,7 @@ import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.hzy.platinum.media.activity.AudioActivity;
+import com.hzy.platinum.media.activity.ImageActivity;
 import com.hzy.platinum.media.activity.VideoActivity;
 
 import java.io.File;
@@ -41,6 +42,11 @@ public class MediaUtils {
                 break;
             case TYPE_AUDIO:
                 intent = new Intent(context, AudioActivity.class);
+                intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
+                context.startActivity(intent);
+                break;
+            case TYPE_IMAGE:
+                intent = new Intent(context, ImageActivity.class);
                 intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
                 context.startActivity(intent);
                 break;
