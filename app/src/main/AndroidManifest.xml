@@ -30,13 +30,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SettingsActivity" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/menu_settings"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.AboutActivity"
+            android:label="@string/menu_about"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.VideoActivity" />
-        <activity android:name=".activity.AudioActivity" />
-        <activity android:name=".activity.ImageActivity" />
+        <activity
+            android:name=".activity.VideoActivity"
+            android:label="@string/title_video_player"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.AudioActivity"
+            android:label="@string/title_audio_player"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.ImageActivity"
+            android:label="@string/title_image_player"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

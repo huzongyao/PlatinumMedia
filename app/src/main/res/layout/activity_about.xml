@@ -89,22 +89,23 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="8dp">
 
                 <TextView
+                    android:id="@+id/about_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="all"
                     android:background="@android:color/white"
                     android:lineSpacingExtra="8dp"
                     android:padding="16dp"
-                    android:text="@string/about_content"
                     android:textColor="#de000000"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:text="@string/about_content" />
             </android.support.v7.widget.CardView>
         </FrameLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -8,6 +8,9 @@
 
 #include <PltUPnP.h>
 
+/**
+ * To hold server instance
+ */
 class DLNAServer {
 public:
     DLNAServer();

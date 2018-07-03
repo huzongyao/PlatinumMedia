@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 /**
  * Created by huzongyao on 2018/6/11.
+ * To Hold Server init params
  */
 
 public class ServerParams implements Parcelable {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Platinum</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_about">关于</string>
+    <string name="pref_server_name_summary">服务器名: %s</string>
+    <string name="pref_server_name_title">服务器名称</string>
+    <string name="pref_if_show_ip_summary">客户端是否显示IP</string>
+    <string name="pref_if_show_ip_title">显示IP</string>
+    <string name="pref_uuid_title">UUID</string>
+    <string name="pref_uuid_summary">%s</string>
+    <string name="pref_dialog_title_uuid">是否生成新的UUID?</string>
+    <string name="server_notification_title">Platinum 服务器</string>
+    <string name="server_notification_text">DLNA 服务器正在运行!</string>
+    <string name="server_started">服务器开始运行！</string>
+    <string name="server_stopped">服务器停止运行!</string>
+    <string name="title_video_player">视频播放器</string>
+    <string name="title_audio_player">音频播放器</string>
+    <string name="title_image_player">图片浏览器</string>
+</resources>

@@ -23,16 +23,21 @@
         Gmail: hzy3774@gmail.com\n
         Foxmail: hzy3774@qq.com\n
     </string>
-    <string name="pref_server_name_key">pref_edit_friendly_name</string>
+    <string name="pref_server_name_key" translatable="false">pref_edit_friendly_name</string>
     <string name="pref_server_name_summary">Server Name: %s</string>
     <string name="pref_server_name_title">Friendly Name</string>
-    <string name="pref_if_show_ip_key">pref_switch_show_ip</string>
+    <string name="pref_if_show_ip_key" translatable="false">pref_switch_show_ip</string>
     <string name="pref_if_show_ip_summary">Show Server IP To Clients</string>
     <string name="pref_if_show_ip_title">Show Ip</string>
-    <string name="pref_uuid_key">pref_text_uuid</string>
+    <string name="pref_uuid_key" translatable="false">pref_text_uuid</string>
     <string name="pref_uuid_summary">%s</string>
     <string name="pref_uuid_title">UUID</string>
     <string name="pref_dialog_title_uuid">Generate New UUID?</string>
     <string name="server_notification_title">Platinum Server</string>
     <string name="server_notification_text">DLNA Server Is Listening!</string>
+    <string name="server_started">Server is started!</string>
+    <string name="server_stopped">Server is stopped!</string>
+    <string name="title_video_player">Video Player</string>
+    <string name="title_audio_player">Audio Player</string>
+    <string name="title_image_player">Image Player</string>
 </resources>

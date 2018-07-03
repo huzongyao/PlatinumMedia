@@ -4,6 +4,7 @@ import android.util.Log;
 
 /**
  * Created by huzongyao on 2018/6/6.
+ * To connect to the native through jni
  */
 
 public class DLNABridge {

@@ -8,6 +8,18 @@ This is a Project for me to study DLNA Media Server Based on Platinum SDK
 * Build the native code with Android NDK and cmake
 
 #### screenshot
+| Video        	| Audio           | Image  	|
+| ------------- |:-------------:| -----:|
+| ![screenshot](https://github.com/huzongyao/PlatinumMedia/misc/master/misc/screen-video.gif?raw=true)| ![screenshot](https://github.com/huzongyao/PlatinumMedia/misc/master/misc/screen-audio.gif?raw=true)| ![screenshot](https://github.com/huzongyao/PlatinumMedia/misc/master/misc/screen-image.gif?raw=true) |
+
+#### Libraries
+* Glide: https://github.com/bumptech/glide
+* ButterKnife: https://github.com/JakeWharton/butterknife
+* EventBus: https://github.com/greenrobot/EventBus
+* ExoPlayer: https://github.com/google/ExoPlayer
+* ExoMedia: https://github.com/brianwernick/ExoMedia
+* AndroidUtilCode: https://github.com/Blankj/AndroidUtilCode
+* PhotoView: https://github.com/chrisbanes/PhotoView
 
 #### Other Projects
 * https://github.com/geniusgithub/MediaRender

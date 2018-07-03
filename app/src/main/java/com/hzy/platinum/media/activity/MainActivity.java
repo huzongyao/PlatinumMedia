@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.blankj.utilcode.util.SnackbarUtils;
 import com.hzy.platinum.media.R;
 import com.hzy.platinum.media.event.ServerStateEvent;
 import com.hzy.platinum.media.instance.ServerInstance;
@@ -68,11 +69,24 @@ public class MainActivity extends AppCompatActivity {
         setFabStatus(state);
     }
 
+    /**
+     * When The Server status changed, update the UI
+     *
+     * @param event hold server status
+     */
     @SuppressWarnings("UnusedDeclaration")
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     public void onServerStateChange(ServerStateEvent event) {
         ServerInstance.State state = event.getState();
         setFabStatus(state);
+        switch (state) {
+            case RUNNING:
+                SnackbarUtils.with(mFab).setMessage(getString(R.string.server_started)).show();
+                break;
+            case IDLE:
+                SnackbarUtils.with(mFab).setMessage(getString(R.string.server_stopped)).show();
+                break;
+        }
     }
 
     private void setFabStatus(ServerInstance.State state) {

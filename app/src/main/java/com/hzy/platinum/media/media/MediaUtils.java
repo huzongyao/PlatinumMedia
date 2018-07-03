@@ -37,16 +37,19 @@ public class MediaUtils {
         switch (mediaInfo.mediaType) {
             case TYPE_VIDEO:
                 Intent intent = new Intent(context, VideoActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
                 context.startActivity(intent);
                 break;
             case TYPE_AUDIO:
                 intent = new Intent(context, AudioActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
                 context.startActivity(intent);
                 break;
             case TYPE_IMAGE:
                 intent = new Intent(context, ImageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(EXTRA_MEDIA_INFO, mediaInfo);
                 context.startActivity(intent);
                 break;
