@@ -3,8 +3,9 @@ package com.hzy.platinum.media.view;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
@@ -17,10 +18,14 @@ public class MusicDiskView extends android.support.v7.widget.AppCompatImageView 
 
     public static final long ONE_ROUND_DURATION = 30_000L;
     public static final int ANIMATION_AMOUNT = 1440;
-    public static final float ANIMATION_DEGREE = ANIMATION_AMOUNT / 360f;
+    public static final float ANIMATION_DEGREE = 360f / ANIMATION_AMOUNT;
+    public static final float SIN_45 = 0.7f;
 
-    private Paint paint;
-    private ValueAnimator valueAnimator;
+    private Paint mCirclePaint;
+    private ValueAnimator mValueAnimator;
+    private float mHalfWidth;
+    private float mCircleRadius;
+    private float mCurrentDegree;
 
     public MusicDiskView(Context context) {
         this(context, null);
@@ -36,37 +41,70 @@ public class MusicDiskView extends android.support.v7.widget.AppCompatImageView 
         initAnimation();
     }
 
+    private void initPaint() {
+        mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mCirclePaint.setStyle(Paint.Style.STROKE);
+    }
+
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int squareDim = 1000000000;
         int h = this.getMeasuredHeight();
         int w = this.getMeasuredWidth();
         int curSquareDim = Math.min(w, h);
-        setMeasuredDimension(curSquareDim, curSquareDim);
+        if (curSquareDim < squareDim) {
+            squareDim = curSquareDim;
+        }
+        setMeasuredDimension(squareDim, squareDim);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mHalfWidth = w / 2f;
+        float mHalfCircle = mHalfWidth * SIN_45;
+        float mStrokeWidth = mHalfWidth - mHalfCircle;
+        mCirclePaint.setStrokeWidth(mStrokeWidth);
+        mCircleRadius = mHalfWidth - mStrokeWidth / 2f;
+        int padding = (int) mStrokeWidth;
+        setPadding(padding, padding, padding, padding);
     }
 
     private void initAnimation() {
-        valueAnimator = ValueAnimator.ofInt(0, ANIMATION_AMOUNT);
-        valueAnimator.setDuration(ONE_ROUND_DURATION);
-        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.addUpdateListener(animation -> invalidate());
-        valueAnimator.start();
+        mValueAnimator = ValueAnimator.ofInt(0, ANIMATION_AMOUNT);
+        mValueAnimator.setDuration(ONE_ROUND_DURATION);
+        mValueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        mValueAnimator.setInterpolator(new LinearInterpolator());
+        mValueAnimator.addUpdateListener(animation -> {
+            mCurrentDegree += ANIMATION_DEGREE;
+            if (mCurrentDegree >= 360) {
+                mCurrentDegree = 0;
+            }
+            invalidate();
+        });
+        mValueAnimator.start();
     }
 
-    private void initPaint() {
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setColor(Color.RED);
+    @Override
+    public void setImageDrawable(@Nullable Drawable drawable) {
+        super.setImageDrawable(drawable);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int i = (int) valueAnimator.getAnimatedValue();
         canvas.save();
-        canvas.rotate(i / ANIMATION_DEGREE, getWidth() / 2f, getHeight() / 2f);
+        canvas.rotate(mCurrentDegree, mHalfWidth, mHalfWidth);
         super.onDraw(canvas);
+        canvas.drawCircle(mHalfWidth, mHalfWidth, mCircleRadius, mCirclePaint);
         canvas.restore();
+    }
+
+    public void start() {
+        mValueAnimator.start();
+    }
+
+    public void stop() {
+        mValueAnimator.cancel();
     }
 }

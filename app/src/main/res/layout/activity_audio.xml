@@ -7,16 +7,18 @@
     android:fitsSystemWindows="true">
 
     <RelativeLayout
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/audio_player_controls_container"
-        android:padding="80dp">
+        android:layout_above="@+id/audio_player_controls_container">
 
         <com.hzy.platinum.media.view.MusicDiskView
             android:id="@+id/audio_player_image"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
             tools:ignore="ContentDescription" />
 
         <ProgressBar
@@ -32,11 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:elevation="4dp"
+        android:background="#57000000"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:translationZ="2dp"
-        tools:background="@color/accent_material_light">
+        android:paddingTop="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"

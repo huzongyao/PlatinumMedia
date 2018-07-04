@@ -67,10 +67,12 @@ public class DLNAService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        ServerParams params = intent.getParcelableExtra(EXTRA_SERVER_PARAMS);
-        if (params != null) {
-            ServerInstance.INSTANCE.start(params);
-            NotificationHelper.INSTANCE.notify(mNotification);
+        if (intent != null) {
+            ServerParams params = intent.getParcelableExtra(EXTRA_SERVER_PARAMS);
+            if (params != null) {
+                ServerInstance.INSTANCE.start(params);
+                NotificationHelper.INSTANCE.notify(mNotification);
+            }
         }
         return super.onStartCommand(intent, flags, startId);
     }
