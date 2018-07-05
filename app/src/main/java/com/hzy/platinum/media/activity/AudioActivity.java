@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.graphics.Palette;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -83,8 +84,12 @@ public class AudioActivity extends BasePlayActivity
     @Override
     void setCurrentMediaAndPlay() {
         if (mMediaInfo != null) {
-            Uri artUri = Uri.parse(mMediaInfo.albumArtURI);
-            mGlide.load(artUri).into(mPhotoViewTarget);
+            if (!TextUtils.isEmpty(mMediaInfo.albumArtURI)) {
+                Uri artUri = Uri.parse(mMediaInfo.albumArtURI);
+                mGlide.load(artUri).into(mPhotoViewTarget);
+            } else {
+                mAudioPlayerImage.setImageResource(R.mipmap.ic_launcher);
+            }
             Uri uri = Uri.parse(mMediaInfo.url);
             mShouldSetDuration = true;
             mAudioPlayer.setDataSource(uri);
@@ -107,6 +112,7 @@ public class AudioActivity extends BasePlayActivity
         if (mAudioPlayer.isPlaying()) {
             mAudioPlayer.stopPlayback();
         }
+        updateUIPlayPause();
         mAudioPlayer.release();
         super.onDestroy();
     }
@@ -192,11 +198,11 @@ public class AudioActivity extends BasePlayActivity
             Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
             if (bitmap != null) {
                 Palette.from(bitmap).generate(palette -> {
-                    Palette.Swatch swatch = palette.getDarkVibrantSwatch();
+                    Palette.Swatch swatch = palette.getLightVibrantSwatch();
                     if (swatch != null) {
                         mMainContainer.setBackgroundColor(swatch.getRgb());
                     }
-                    swatch = palette.getLightVibrantSwatch();
+                    swatch = palette.getDarkVibrantSwatch();
                     if (swatch != null) {
                         mControlsContainer.setBackgroundColor(swatch.getRgb());
                     }

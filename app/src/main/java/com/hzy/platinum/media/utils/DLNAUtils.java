@@ -24,6 +24,12 @@ public class DLNAUtils {
     public final static String OBJECT_CLASS_VIDEO = "object.item.videoItem";
     public final static String OBJECT_CLASS_IMAGE = "object.item.imageItem";
 
+    /**
+     * Get media info from url and meta
+     * @param url url
+     * @param meta meta
+     * @return MediaInfo
+     */
     public static MediaInfo getMediaInfo(String url, String meta) {
         MediaInfo mediaInfo = getMediaInfoFromMeta(meta);
         if (mediaInfo.mediaType == MediaType.TYPE_UNKNOWN) {

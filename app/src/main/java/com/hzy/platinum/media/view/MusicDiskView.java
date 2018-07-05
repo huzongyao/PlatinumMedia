@@ -101,10 +101,14 @@ public class MusicDiskView extends android.support.v7.widget.AppCompatImageView 
     }
 
     public void start() {
-        mValueAnimator.start();
+        if (!mValueAnimator.isRunning()) {
+            mValueAnimator.start();
+        }
     }
 
     public void stop() {
-        mValueAnimator.cancel();
+        if (mValueAnimator.isRunning()) {
+            mValueAnimator.cancel();
+        }
     }
 }
