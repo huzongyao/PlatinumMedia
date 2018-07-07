@@ -10,7 +10,7 @@ This is a Project for me to study DLNA Media Server Based on Platinum SDK
 #### screenshot
 | Video        	| Audio           | Image  	|
 | ------------- |:-------------:| -----:|
-| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-video.gif)| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-audio.gif)| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-audio.gif) |
+| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-video.gif)| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-audio.gif)| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-image.gif) |
 
 #### Libraries
 * Glide: https://github.com/bumptech/glide
