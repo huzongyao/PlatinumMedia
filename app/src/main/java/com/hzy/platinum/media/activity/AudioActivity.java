@@ -149,6 +149,13 @@ public class AudioActivity extends BasePlayActivity
     }
 
     @Override
+    protected void onMediaPause() {
+        if (mAudioPlayer.isPlaying()) {
+            mAudioPlayer.pause();
+        }
+    }
+
+    @Override
     public void onBufferingUpdate(int percent) {
         long duration = mAudioPlayer.getDuration();
         if (duration > 0 && mShouldSetDuration) {

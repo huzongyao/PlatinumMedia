@@ -36,16 +36,9 @@ JNI_FUNC(nStart)(JNIEnv *env, jclass type, jlong self,
                  jstring uuid_, jlong port, jboolean port_rebind);
 
 JNIEXPORT jint JNICALL
-JNI_FUNC(nSetMediaDuration)(JNIEnv *env, jclass type, jlong self,
-                            jstring duration_);
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nSetTimePosition)(JNIEnv *env, jclass type, jlong self,
-                           jstring position_);
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nSetTransportState)(JNIEnv *env, jclass type, jlong self,
-                             jstring state_);
+JNI_FUNC(nExecute)(JNIEnv *env, jclass type, jlong self, jint cmd,
+                   jstring param1_, jstring param2_,
+                   jstring param3_);
 
 JNIEXPORT jint JNICALL
 JNI_FUNC(nStop)(JNIEnv *env, jclass type, jlong self);

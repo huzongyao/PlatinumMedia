@@ -3,9 +3,9 @@ package com.hzy.platinum.media.activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.devbrackets.android.exomedia.ui.widget.VideoControls;
+import com.devbrackets.android.exomedia.ui.widget.VideoControlsCore;
 import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.hzy.platinum.media.R;
 
@@ -41,12 +41,19 @@ public class VideoActivity extends BasePlayActivity {
     @Override
     void setCurrentMediaAndPlay() {
         if (mMediaInfo != null) {
-            VideoControls videoControls = mVideoView.getVideoControls();
-            if (videoControls != null) {
-                videoControls.setTitle(mMediaInfo.title);
+            VideoControlsCore videoControls = mVideoView.getVideoControlsCore();
+            if (videoControls != null && videoControls instanceof VideoControls) {
+                ((VideoControls) videoControls).setTitle(mMediaInfo.title);
             }
             Uri uri = Uri.parse(mMediaInfo.url);
             mVideoView.setVideoURI(uri);
+        }
+    }
+
+    @Override
+    protected void onMediaPause() {
+        if(mVideoView.isPlaying()){
+            mVideoView.pause();
         }
     }
 
@@ -60,11 +67,5 @@ public class VideoActivity extends BasePlayActivity {
     @Override
     public void onCompletion() {
         mVideoView.seekTo(0);
-    }
-
-    @Override
-    public void onBufferingUpdate(int percent) {
-        long posi = mVideoView.getCurrentPosition();
-        Log.e("TAG", posi + "***");
     }
 }

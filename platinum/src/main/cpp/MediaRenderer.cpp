@@ -190,7 +190,6 @@ NPT_Result MediaRenderer::DoJavaCallback(int type, const char *param1,
     if (inflectClass == NULL || inflectMethod == NULL) {
         goto end;
     }
-    //LOGD("TYPE: %d\nPARAM1: %s\nPARAM1: %s", type, param1, param2);
     jParam1 = env->NewStringUTF(param1);
     jParam2 = env->NewStringUTF(param2);
     jParam3 = env->NewStringUTF(param3);

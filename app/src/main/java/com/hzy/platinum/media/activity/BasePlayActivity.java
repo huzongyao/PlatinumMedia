@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.devbrackets.android.exomedia.listener.OnBufferUpdateListener;
@@ -16,6 +17,7 @@ import com.hzy.platinum.media.media.MediaInfo;
 import com.hzy.platinum.media.media.MediaUtils;
 import com.plutinosoft.platinum.CallbackTypes;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -38,6 +40,13 @@ public abstract class BasePlayActivity extends AppCompatActivity
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         parseIntent(getIntent());
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     @Override
@@ -66,29 +75,31 @@ public abstract class BasePlayActivity extends AppCompatActivity
     public void onServerStateChange(NativeAsyncEvent event) {
         switch (event.type) {
             case CallbackTypes.CALLBACK_EVENT_ON_PAUSE:
+                onMediaPause();
                 break;
             case CallbackTypes.CALLBACK_EVENT_ON_PLAY:
                 break;
             case CallbackTypes.CALLBACK_EVENT_ON_SET_VOLUME:
+                Log.e("TAG", "" + event.param1);
                 break;
             default:
                 break;
         }
     }
 
+    protected void onMediaPause() {
+    }
+
     @Override
     public void onBufferingUpdate(int percent) {
-
     }
 
     @Override
     public void onCompletion() {
-
     }
 
     @Override
     public void onPrepared() {
-
     }
 
     /**

@@ -56,9 +56,11 @@ JNI_FUNC(nStart)(JNIEnv *env, jclass type, jlong self,
 }
 
 JNIEXPORT jint JNICALL
-JNI_FUNC(nSetMediaDuration)(JNIEnv *env, jclass type, jlong self,
-                            jstring duration_) {
-    const char *duration = env->GetStringUTFChars(duration_, 0);
+JNI_FUNC(nExecute)(JNIEnv *env, jclass type, jlong self, jint cmd, jstring param1_,
+                   jstring param2_, jstring param3_) {
+    const char *param1 = env->GetStringUTFChars(param1_, 0);
+    const char *param2 = env->GetStringUTFChars(param2_, 0);
+    const char *param3 = env->GetStringUTFChars(param3_, 0);
     NPT_Result ret = NPT_ERROR_INVALID_STATE;
     if (self != 0L) {
         DLNAServer *pServer = (DLNAServer *) self;
@@ -66,37 +68,9 @@ JNI_FUNC(nSetMediaDuration)(JNIEnv *env, jclass type, jlong self,
     } else {
         LOGE("MediaRenderer is Null!");
     }
-    env->ReleaseStringUTFChars(duration_, duration);
-    return ret;
-}
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nSetTimePosition)(JNIEnv *env, jclass type, jlong self,
-                           jstring position_) {
-    const char *position = env->GetStringUTFChars(position_, 0);
-    NPT_Result ret = NPT_ERROR_INVALID_STATE;
-    if (self != 0L) {
-        DLNAServer *pServer = (DLNAServer *) self;
-        //ret = pRender->SetTimePosition(position);
-    } else {
-        LOGE("MediaRenderer is Null!");
-    }
-    env->ReleaseStringUTFChars(position_, position);
-    return ret;
-}
-
-JNIEXPORT jint JNICALL
-JNI_FUNC(nSetTransportState)(JNIEnv *env, jclass type, jlong self,
-                             jstring state_) {
-    const char *state = env->GetStringUTFChars(state_, 0);
-    NPT_Result ret = NPT_ERROR_INVALID_STATE;
-    if (self != 0L) {
-        DLNAServer *pServer = (DLNAServer *) self;
-        //ret = pRender->SetTransportState(state);
-    } else {
-        LOGE("MediaRenderer is Null!");
-    }
-    env->ReleaseStringUTFChars(state_, state);
+    env->ReleaseStringUTFChars(param1_, param1);
+    env->ReleaseStringUTFChars(param2_, param2);
+    env->ReleaseStringUTFChars(param3_, param3);
     return ret;
 }
 
