@@ -38,7 +38,7 @@ public enum NotificationHelper {
     public Notification getNotification(Intent intent, String title, String body) {
         PendingIntent pendingIntent = PendingIntent.getActivity(Utils.getApp(),
                 0, intent, 0);
-        return new NotificationCompat.Builder(Utils.getApp(), PRIMARY_CHANNEL)
+        return new NotificationCompat.Builder(Utils.getApp())
                 .setContentTitle(title)
                 .setContentText(body)
                 .setSmallIcon(R.mipmap.ic_launcher)
