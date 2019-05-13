@@ -46,3 +46,5 @@
   **[] $VALUES;
   public *;
 }
+
+-keep com.hzy.platinum.media.event.**{*;}

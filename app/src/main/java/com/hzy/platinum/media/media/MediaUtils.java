@@ -2,19 +2,8 @@ package com.hzy.platinum.media.media;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.format.DateUtils;
 
-import com.devbrackets.android.exomedia.ExoMedia;
-import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
-import com.google.android.exoplayer2.upstream.DataSource;
-import com.google.android.exoplayer2.upstream.TransferListener;
-import com.google.android.exoplayer2.upstream.cache.Cache;
-import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
-import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory;
-import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
-import com.google.android.exoplayer2.upstream.cache.SimpleCache;
 import com.hzy.platinum.media.activity.AudioActivity;
 import com.hzy.platinum.media.activity.ImageActivity;
 import com.hzy.platinum.media.activity.VideoActivity;
@@ -22,8 +11,6 @@ import com.hzy.platinum.media.activity.VideoActivity;
 import java.io.File;
 import java.util.Formatter;
 import java.util.Locale;
-
-import okhttp3.OkHttpClient;
 
 /**
  * Created by huzongyao on 2018/6/29.
@@ -66,18 +53,17 @@ public class MediaUtils {
 
     /**
      * Init exo media
+     *
      * @param context context
      */
     public static void configureExoMedia(Context context) {
         // Registers the media sources to use the OkHttp client instead of the standard Apache one
         // Note: the OkHttpDataSourceFactory can be found in the ExoPlayer extension library `extension-okhttp`
-        ExoMedia.setDataSourceFactoryProvider(new ExoMedia.DataSourceFactoryProvider() {
-            @Nullable
-            private CacheDataSourceFactory instance;
+        /*ExoMedia.setDataSourceFactoryProvider(new ExoMedia.DataSourceFactoryProvider() {
 
             @NonNull
             @Override
-            public DataSource.Factory provide(@NonNull String userAgent, @Nullable TransferListener<? super DataSource> listener) {
+            public DataSource.Factory provide(@NonNull String userAgent, @Nullable TransferListener listener) {
                 if (instance == null) {
                     // Updates the network data source to use the OKHttp implementation
                     DataSource.Factory upstreamFactory = new OkHttpDataSourceFactory(new OkHttpClient(), userAgent, listener);
@@ -89,7 +75,11 @@ public class MediaUtils {
                 }
                 return instance;
             }
-        });
+
+            @Nullable
+            private CacheDataSourceFactory instance;
+
+        });*/
     }
 
     private static File getCacheDirectory(Context context) {

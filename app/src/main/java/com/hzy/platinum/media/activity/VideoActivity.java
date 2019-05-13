@@ -42,7 +42,7 @@ public class VideoActivity extends BasePlayActivity {
     void setCurrentMediaAndPlay() {
         if (mMediaInfo != null) {
             VideoControlsCore videoControls = mVideoView.getVideoControlsCore();
-            if (videoControls != null && videoControls instanceof VideoControls) {
+            if (videoControls instanceof VideoControls) {
                 ((VideoControls) videoControls).setTitle(mMediaInfo.title);
             }
             Uri uri = Uri.parse(mMediaInfo.url);

@@ -1,6 +1,10 @@
 # PlatinumMedia(DLNA服务端)
 This is a Project for me to study DLNA Media Server Based on Platinum SDK.
 
+[![Travis](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)](https://github.com/huzongyao/PlatinumMedia)
+[![Travis](https://img.shields.io/badge/API-16+-brightgreen.svg)](https://github.com/huzongyao/PlatinumMedia)
+[![Travis](https://img.shields.io/badge/platinum-v1.0.1-brightgreen.svg)](https://github.com/huzongyao/PlatinumMedia/releases)
+
 #### Details
 The Platinum UPnP SDK is a cross-platform C++ library that makes it easy to build DLNA Compliant Devices.
 It compiles and runs on Windows, Mac OSX, Linux, iPhone, Android and more.
@@ -19,6 +23,7 @@ DLNA(数字生活网络联盟)服务端(如电视，机顶盒)通常会实现两
 * Neptune C++ Runtime: https://github.com/plutinosoft/Neptune
 * Compile With Neptune-1.2.3 and Platinum-1.2.0
 * Build the native code with Android NDK and cmake
+* App下载体验：https://github.com/huzongyao/PlatinumMedia/releases
 
 #### screenshot
 | Video        	| Audio           | Image  	|
