@@ -2,7 +2,8 @@ package com.hzy.platinum.media.fragment;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.hzy.platinum.media.R;
 

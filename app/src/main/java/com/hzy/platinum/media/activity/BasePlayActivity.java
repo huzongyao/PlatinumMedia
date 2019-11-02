@@ -3,11 +3,12 @@ package com.hzy.platinum.media.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.devbrackets.android.exomedia.listener.OnBufferUpdateListener;
 import com.devbrackets.android.exomedia.listener.OnCompletionListener;

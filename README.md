@@ -5,6 +5,11 @@ This is a Project for me to study DLNA Media Server Based on Platinum SDK.
 [![Travis](https://img.shields.io/badge/API-16+-brightgreen.svg)](https://github.com/huzongyao/PlatinumMedia)
 [![Travis](https://img.shields.io/badge/platinum-v1.0.1-brightgreen.svg)](https://github.com/huzongyao/PlatinumMedia/releases)
 
+#### Screenshot
+|   Video       |   Audio       | Image |
+| ------------- |:-------------:| -----:|
+| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-video.gif)| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-audio.gif)| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-image.gif) |
+
 #### Details
 The Platinum UPnP SDK is a cross-platform C++ library that makes it easy to build DLNA Compliant Devices.
 It compiles and runs on Windows, Mac OSX, Linux, iPhone, Android and more.
@@ -25,11 +30,6 @@ DLNA(数字生活网络联盟)服务端(如电视，机顶盒)通常会实现两
 * Build the native code with Android NDK and cmake
 * App下载体验：https://github.com/huzongyao/PlatinumMedia/releases
 
-#### screenshot
-| Video        	| Audio           | Image  	|
-| ------------- |:-------------:| -----:|
-| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-video.gif)| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-audio.gif)| ![screenshot](https://raw.githubusercontent.com/huzongyao/PlatinumMedia/master/misc/screen-image.gif) |
-
 #### Libraries
 * Glide: https://github.com/bumptech/glide
 * ButterKnife: https://github.com/JakeWharton/butterknife
@@ -44,12 +44,18 @@ DLNA(数字生活网络联盟)服务端(如电视，机顶盒)通常会实现两
 * https://github.com/RiverrunNetwork/TV_DLNA_Server
 
 ### About Me
- * GitHub: [http://huzongyao.github.io/](http://huzongyao.github.io/)
- * ITEye博客：[http://hzy3774.iteye.com/](http://hzy3774.iteye.com/)
- * 新浪微博: [http://weibo.com/hzy3774](http://weibo.com/hzy3774)
+ * GitHub: [https://huzongyao.github.io/](https://huzongyao.github.io/)
+ * ITEye博客：[https://hzy3774.iteye.com/](https://hzy3774.iteye.com/)
+ * 新浪微博: [https://weibo.com/hzy3774](https://weibo.com/hzy3774)
 
 ### Contact To Me
- * QQ: [377406997](http://wpa.qq.com/msgrd?v=3&uin=377406997&site=qq&menu=yes)
+ * QQ: [377406997](https://wpa.qq.com/msgrd?v=3&uin=377406997&site=qq&menu=yes)
  * Gmail: [hzy3774@gmail.com](mailto:hzy3774@gmail.com)
  * Foxmail: [hzy3774@qq.com](mailto:hzy3774@qq.com)
  * WeChat: hzy3774
+
+ ![image](https://raw.githubusercontent.com/hzy3774/AndroidP7zip/master/misc/wechat.png)
+
+### Others
+ * 想捐助我喝杯热水(¥0.01起捐)</br>
+ ![donate](https://github.com/huzongyao/JChineseChess/blob/master/misc/donate.png?raw=true)

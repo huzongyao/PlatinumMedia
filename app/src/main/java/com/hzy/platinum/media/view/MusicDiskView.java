@@ -5,16 +5,18 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
 /**
  * Created by huzongyao on 2018/7/2.
  * To Show some animation when music playing
  */
 
-public class MusicDiskView extends android.support.v7.widget.AppCompatImageView {
+public class MusicDiskView extends AppCompatImageView {
 
     public static final long ONE_ROUND_DURATION = 30_000L;
     public static final int ANIMATION_AMOUNT = 1440;

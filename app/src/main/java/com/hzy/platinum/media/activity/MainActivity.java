@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.blankj.utilcode.util.SnackbarUtils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hzy.platinum.media.R;
 import com.hzy.platinum.media.event.ServerStateEvent;
 import com.hzy.platinum.media.instance.ServerInstance;

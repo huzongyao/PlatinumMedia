@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 
 import com.hzy.platinum.media.R;
 import com.hzy.platinum.media.activity.MainActivity;
@@ -34,7 +33,6 @@ public class DLNAService extends Service {
     private WifiManager.MulticastLock mMulticastLock;
     private Notification mNotification;
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
