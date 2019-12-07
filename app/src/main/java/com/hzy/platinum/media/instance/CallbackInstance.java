@@ -6,8 +6,6 @@ import com.hzy.platinum.media.event.NativeAsyncEvent;
 import com.hzy.platinum.media.media.MediaInfo;
 import com.hzy.platinum.media.media.MediaType;
 import com.hzy.platinum.media.utils.DLNAUtils;
-import com.plutinosoft.platinum.CallbackTypes;
-import com.plutinosoft.platinum.DLNACallback;
 
 import org.greenrobot.eventbus.EventBus;
 

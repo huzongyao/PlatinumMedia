@@ -21,13 +21,15 @@ include_directories(Platinum/Platinum
         Platinum/Devices/MediaConnect
         Platinum/Devices/MediaRenderer
         Platinum/Extras
-        Neptune/Core)
+        Neptune/Core
+        Hupnp/
+        json/)
 
 file(GLOB_RECURSE NATIVE_SRCS "*.cpp")
 
-add_library(platinum-jni SHARED ${NATIVE_SRCS})
+add_library(platinum SHARED ${NATIVE_SRCS})
 
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in the
 # build script, prebuilt third-party libraries, or system libraries.
-target_link_libraries(platinum-jni log android)
+target_link_libraries(platinum log android)

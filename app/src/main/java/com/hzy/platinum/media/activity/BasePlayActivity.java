@@ -16,7 +16,6 @@ import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.hzy.platinum.media.event.NativeAsyncEvent;
 import com.hzy.platinum.media.media.MediaInfo;
 import com.hzy.platinum.media.media.MediaUtils;
-import com.plutinosoft.platinum.CallbackTypes;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

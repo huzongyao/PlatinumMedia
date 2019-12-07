@@ -4,8 +4,6 @@ import android.util.Log;
 
 import com.hzy.platinum.media.event.ServerAsyncEvent;
 import com.hzy.platinum.media.event.ServerStateEvent;
-import com.plutinosoft.platinum.DLNABridge;
-import com.plutinosoft.platinum.ServerParams;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

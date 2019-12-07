@@ -1,1 +1,1 @@
-include ':app', ':platinum'
+include ':platinum', ':client', ':server'

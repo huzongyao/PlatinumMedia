@@ -13,8 +13,6 @@ import com.hzy.platinum.media.event.NativeAsyncEvent;
 import com.hzy.platinum.media.instance.NotificationHelper;
 import com.hzy.platinum.media.instance.ServerInstance;
 import com.hzy.platinum.media.media.MediaUtils;
-import com.plutinosoft.platinum.CallbackTypes;
-import com.plutinosoft.platinum.ServerParams;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

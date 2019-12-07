@@ -17,7 +17,6 @@ import com.hzy.platinum.media.event.ServerStateEvent;
 import com.hzy.platinum.media.instance.ServerInstance;
 import com.hzy.platinum.media.service.DLNAService;
 import com.hzy.platinum.media.utils.UUIDUtils;
-import com.plutinosoft.platinum.ServerParams;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
