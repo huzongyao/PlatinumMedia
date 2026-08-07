@@ -49,7 +49,7 @@ JNIEXPORT jint JNICALL
 JNI_FUNC(nSetCallback)(JNIEnv *env, jclass type, jlong iid, jobject callable) {
     if (iid) {
         auto *p = (AndUPnP *) iid;
-        jmethodID methodId = env->GetMethodID(type, "onEvent",
+        jmethodID methodId = env->GetMethodID(env->GetObjectClass(callable), "onEvent",
                                               "(Ljava/lang/String;)Ljava/lang/String;");
         p->SetJEventCallback(env, callable, methodId);
     }
@@ -72,4 +72,28 @@ JNI_FUNC(nStop)(JNIEnv *env, jclass type, jlong iid) {
         p->Stop();
     }
     return 0;
+}
+
+JNIEXPORT jint JNICALL
+JNI_FUNC(nAddController)(JNIEnv *env, jclass type, jlong iid, jstring param_) {
+    const char *param = env->GetStringUTFChars(param_, nullptr);
+    int ret = 0;
+    if (iid) {
+        auto *p = (AndUPnP *) iid;
+        ret = p->AddController(param);
+    }
+    env->ReleaseStringUTFChars(param_, param);
+    return ret;
+}
+
+JNIEXPORT jint JNICALL
+JNI_FUNC(nInvokeAction)(JNIEnv *env, jclass type, jlong iid, jstring param_) {
+    const char *param = env->GetStringUTFChars(param_, nullptr);
+    int ret = 0;
+    if (iid) {
+        auto *p = (AndUPnP *) iid;
+        ret = p->InvokeAction(param);
+    }
+    env->ReleaseStringUTFChars(param_, param);
+    return ret;
 }

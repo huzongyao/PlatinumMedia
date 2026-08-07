@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">DMR</string>
+    <string name="status_idle">状态：未启动</string>
+    <string name="status_running">状态：已启动，等待控制器投送…</string>
+    <string name="status_error">状态：启动失败</string>
+    <string name="no_media">当前媒体：无</string>
+    <string name="current_media">当前媒体：%s</string>
+    <string name="media_type_video">媒体类型：视频</string>
+    <string name="media_type_audio">媒体类型：音频</string>
+    <string name="media_type_image">媒体类型：图片</string>
+    <string name="audio_playing">♪ 正在播放音频</string>
+    <string name="play">播放</string>
+    <string name="pause">暂停</string>
+    <string name="stop">停止</string>
+    <string name="volume">音量</string>
+    <string name="channel_name">DLNA 渲染器</string>
+    <string name="notification_text">DLNA 渲染器运行中，可被其他设备投送</string>
 </resources>

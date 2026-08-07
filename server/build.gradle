@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    namespace "com.hzy.platinum.server"
+    compileSdkVersion 36
     signingConfigs {
         demokey {
             storeFile file('demokey.jks')
@@ -12,8 +13,8 @@ android {
     }
     defaultConfig {
         applicationId "com.hzy.platinum.server"
-        minSdkVersion 15
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0.0"
         resConfigs "zh-rCN"
@@ -44,14 +45,14 @@ android {
     lintOptions {
         abortOnError false
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.blankj:utilcode:1.25.9'
-    implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.jakewharton:butterknife:10.2.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    implementation 'com.blankj:utilcode:1.30.7'
     implementation project(path: ':platinum')
 }

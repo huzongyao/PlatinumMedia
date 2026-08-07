@@ -7,6 +7,9 @@ cmake_minimum_required(VERSION 3.4.1)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNPT_CONFIG_HAVE_SYSTEM_LOG_CONFIG")
 
+# Align LOAD segments to 16 KB for compatibility with Android 15+ 16 KB page-size devices.
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,max-page-size=16384")
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds it for you.

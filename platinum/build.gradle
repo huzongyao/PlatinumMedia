@@ -1,15 +1,16 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    namespace "com.plutinosoft.platinum"
+    compileSdkVersion 36
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0.0"
         ndk {
-            abiFilters 'armeabi-v7a'//, 'armeabi-v7a', 'arm64-v8a', 'x86'
+            abiFilters 'arm64-v8a'//'armeabi-v7a'//, 'armeabi-v7a', 'arm64-v8a', 'x86'
         }
         externalNativeBuild {
             cmake {
@@ -35,4 +36,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.annotation:annotation:1.9.1'
 }

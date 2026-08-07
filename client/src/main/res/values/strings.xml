@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">DMC</string>
+    <string name="status_idle">正在搜索局域网内的渲染设备…</string>
+    <string name="device_list_title">渲染设备列表</string>
+    <string name="hint_uri">媒体 URL（如 http://192.168.1.10:8080/video.mp4）</string>
+    <string name="hint_seek">跳转时间，格式 HH:MM:SS</string>
+    <string name="cast">投送</string>
+    <string name="play">播放</string>
+    <string name="pause">暂停</string>
+    <string name="stop">停止</string>
+    <string name="seek">跳转</string>
+    <string name="volume">音量</string>
 </resources>

@@ -38,6 +38,12 @@ JNI_FUNC(nStart)(JNIEnv *env, jclass type, jlong iid);
 JNIEXPORT jint JNICALL
 JNI_FUNC(nStop)(JNIEnv *env, jclass type, jlong iid);
 
+JNIEXPORT jint JNICALL
+JNI_FUNC(nAddController)(JNIEnv *env, jclass type, jlong iid, jstring param_);
+
+JNIEXPORT jint JNICALL
+JNI_FUNC(nInvokeAction)(JNIEnv *env, jclass type, jlong iid, jstring param_);
+
 #ifdef __cplusplus
 }
 #endif
